@@ -146,13 +146,17 @@ function extractDescription(markdown: string): string {
   return "";
 }
 
-function generateSlug(keyword: string): string {
+function generateSlug(category: string, keyword: string): string {
   const timestamp = Date.now().toString(36);
-  const base = keyword
-    .toLowerCase()
-    .replace(/[^\w\u3000-\u9fff\uff00-\uffef\s-]+/g, "")
-    .replace(/[\s\u3000]+/g, "-")
-    .slice(0, 60);
+  // Extract ASCII words from keyword (e.g. "Claude Code", "Cursor")
+  const asciiWords = keyword
+    .match(/[a-zA-Z0-9]+/g)
+    ?.slice(0, 4)
+    .join("-")
+    .toLowerCase();
+  const base = asciiWords && asciiWords.length > 3
+    ? `${category}-${asciiWords}`
+    : `${category}-${timestamp}`;
   return `${base}-${timestamp}`;
 }
 
@@ -209,7 +213,7 @@ export async function generateArticle(): Promise<GenerationResult> {
     const title = extractTitle(contentMd);
     const description = extractDescription(contentMd);
     const toc = extractToc(contentMd);
-    const slug = generateSlug(kw.keyword);
+    const slug = generateSlug(kw.category, kw.keyword);
 
     // 4. Save article
     const { error: articleError } = await supabase.from("blog_articles").insert({
