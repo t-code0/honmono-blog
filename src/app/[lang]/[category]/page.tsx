@@ -4,7 +4,9 @@ import { ArticleCard } from "@/components/ArticleCard";
 import { InternalLinks } from "@/components/InternalLinks";
 import {
   CATEGORIES,
+  ACTIVE_LANGS,
   CATEGORY_SLUGS,
+  ENABLE_I18N,
   getCategoryBySlug,
   SITE_URL,
   SUPPORTED_LANGS,
@@ -15,7 +17,7 @@ import Link from "next/link";
 
 export function generateStaticParams() {
   const params: { lang: string; category: string }[] = [];
-  for (const lang of SUPPORTED_LANGS) {
+  for (const lang of ACTIVE_LANGS) {
     for (const slug of CATEGORY_SLUGS) {
       params.push({ lang, category: slug });
     }
@@ -45,11 +47,10 @@ export async function generateMetadata({
     title,
     description,
     alternates: {
-      canonical: `${SITE_URL}/${lang}/${category}`,
-      languages: {
-        ja: `${SITE_URL}/ja/${category}`,
-        en: `${SITE_URL}/en/${category}`,
-      },
+      canonical: `${SITE_URL}/ja/${category}`,
+      languages: ENABLE_I18N
+        ? { ja: `${SITE_URL}/ja/${category}`, en: `${SITE_URL}/en/${category}` }
+        : { ja: `${SITE_URL}/ja/${category}` },
     },
     openGraph: {
       title,

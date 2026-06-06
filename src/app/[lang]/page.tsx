@@ -2,7 +2,7 @@ import { type Metadata } from "next";
 import Link from "next/link";
 import { ArticleCard } from "@/components/ArticleCard";
 import { InternalLinks } from "@/components/InternalLinks";
-import { CATEGORIES, SITE_URL, type Lang } from "@/lib/constants";
+import { CATEGORIES, SITE_URL, ENABLE_I18N, type Lang } from "@/lib/constants";
 import { getLatestArticles } from "@/lib/articles";
 
 export async function generateMetadata({
@@ -21,11 +21,10 @@ export async function generateMetadata({
         ? "世界の食・日本文化・AI・健康・サウナ・珈琲・キャンプ。AIが毎日1記事、ニッチな知識を深掘りしてお届け。"
         : "World food, Japanese culture, AI, health, sauna, coffee, camping. AI delivers one deep-dive article daily.",
     alternates: {
-      canonical: `${SITE_URL}/${lang}`,
-      languages: {
-        ja: `${SITE_URL}/ja`,
-        en: `${SITE_URL}/en`,
-      },
+      canonical: `${SITE_URL}/ja`,
+      languages: ENABLE_I18N
+        ? { ja: `${SITE_URL}/ja`, en: `${SITE_URL}/en` }
+        : { ja: `${SITE_URL}/ja` },
     },
   };
 }

@@ -1,6 +1,6 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { SUPPORTED_LANGS, SITE_URL, type Lang } from "@/lib/constants";
+import { SUPPORTED_LANGS, ENABLE_I18N, SITE_URL, type Lang } from "@/lib/constants";
 import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
@@ -18,27 +18,31 @@ export default async function LangLayout({
   if (!SUPPORTED_LANGS.includes(lang as Lang)) {
     notFound();
   }
+
   const validLang = lang as Lang;
-  const altLang = validLang === "ja" ? "en" : "ja";
 
   return (
     <>
       <head>
         <link
           rel="alternate"
-          hrefLang={validLang}
-          href={`${SITE_URL}/${validLang}`}
-        />
-        <link
-          rel="alternate"
-          hrefLang={altLang}
-          href={`${SITE_URL}/${altLang}`}
-        />
-        <link
-          rel="alternate"
-          hrefLang="x-default"
+          hrefLang="ja"
           href={`${SITE_URL}/ja`}
         />
+        {ENABLE_I18N && (
+          <>
+            <link
+              rel="alternate"
+              hrefLang="en"
+              href={`${SITE_URL}/en`}
+            />
+            <link
+              rel="alternate"
+              hrefLang="x-default"
+              href={`${SITE_URL}/ja`}
+            />
+          </>
+        )}
       </head>
       <Header lang={validLang} />
       <main className="flex-1">{children}</main>

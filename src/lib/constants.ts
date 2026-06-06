@@ -1,8 +1,12 @@
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://honmono-blog.vercel.app";
 export const ADSENSE_PUB_ID = process.env.ADSENSE_PUB_ID || "pub-8285912744304653";
 
+// Phase2で true にして多言語有効化
+export const ENABLE_I18N = process.env.NEXT_PUBLIC_ENABLE_I18N === "true";
+
 export const SUPPORTED_LANGS = ["ja", "en"] as const;
 export type Lang = (typeof SUPPORTED_LANGS)[number];
+export const ACTIVE_LANGS: readonly Lang[] = ENABLE_I18N ? SUPPORTED_LANGS : ["ja"];
 
 export interface Category {
   slug: string;

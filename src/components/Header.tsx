@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CATEGORIES, type Lang } from "@/lib/constants";
+import { CATEGORIES, ENABLE_I18N, type Lang } from "@/lib/constants";
 
 export function Header({ lang }: { lang: Lang }) {
   return (
@@ -22,20 +22,22 @@ export function Header({ lang }: { lang: Lang }) {
             </Link>
           ))}
         </nav>
-        <div className="flex items-center gap-2">
-          <Link
-            href={`/ja`}
-            className={`text-xs px-2 py-1 rounded ${lang === "ja" ? "bg-primary text-white" : "text-muted hover:text-foreground"}`}
-          >
-            JP
-          </Link>
-          <Link
-            href={`/en`}
-            className={`text-xs px-2 py-1 rounded ${lang === "en" ? "bg-primary text-white" : "text-muted hover:text-foreground"}`}
-          >
-            EN
-          </Link>
-        </div>
+        {ENABLE_I18N && (
+          <div className="flex items-center gap-2">
+            <Link
+              href={`/ja`}
+              className={`text-xs px-2 py-1 rounded ${lang === "ja" ? "bg-primary text-white" : "text-muted hover:text-foreground"}`}
+            >
+              JP
+            </Link>
+            <Link
+              href={`/en`}
+              className={`text-xs px-2 py-1 rounded ${lang === "en" ? "bg-primary text-white" : "text-muted hover:text-foreground"}`}
+            >
+              EN
+            </Link>
+          </div>
+        )}
       </div>
       {/* Mobile nav */}
       <nav className="md:hidden overflow-x-auto border-t border-border">

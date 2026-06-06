@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
   CATEGORY_SLUGS,
+  ENABLE_I18N,
   getCategoryBySlug,
   SITE_URL,
   type Lang,
@@ -33,11 +34,10 @@ export async function generateMetadata({
     title,
     description,
     alternates: {
-      canonical: url,
-      languages: {
-        ja: `${SITE_URL}/ja/${category}/${slug}`,
-        en: `${SITE_URL}/en/${category}/${slug}`,
-      },
+      canonical: `${SITE_URL}/ja/${category}/${slug}`,
+      languages: ENABLE_I18N
+        ? { ja: `${SITE_URL}/ja/${category}/${slug}`, en: `${SITE_URL}/en/${category}/${slug}` }
+        : { ja: `${SITE_URL}/ja/${category}/${slug}` },
     },
     openGraph: {
       title,
