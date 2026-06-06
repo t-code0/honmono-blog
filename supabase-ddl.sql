@@ -87,21 +87,21 @@ CREATE INDEX IF NOT EXISTS idx_affiliate_programs_active ON affiliate_programs(a
 
 ALTER TABLE affiliate_programs ENABLE ROW LEVEL SECURITY;
 
--- 8. affiliate_clicks トラッキングテーブル
-CREATE TABLE IF NOT EXISTS affiliate_clicks (
+-- 8. blog_affiliate_clicks トラッキングテーブル
+CREATE TABLE IF NOT EXISTS blog_affiliate_clicks (
   id BIGSERIAL PRIMARY KEY,
   article_id BIGINT REFERENCES blog_articles(id),
   program_id BIGINT REFERENCES affiliate_programs(id),
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-CREATE INDEX IF NOT EXISTS idx_affiliate_clicks_article ON affiliate_clicks(article_id);
-CREATE INDEX IF NOT EXISTS idx_affiliate_clicks_program ON affiliate_clicks(program_id);
-CREATE INDEX IF NOT EXISTS idx_affiliate_clicks_date ON affiliate_clicks(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_blog_affiliate_clicks_article ON blog_affiliate_clicks(article_id);
+CREATE INDEX IF NOT EXISTS idx_blog_affiliate_clicks_program ON blog_affiliate_clicks(program_id);
+CREATE INDEX IF NOT EXISTS idx_blog_affiliate_clicks_date ON blog_affiliate_clicks(created_at DESC);
 
-ALTER TABLE affiliate_clicks ENABLE ROW LEVEL SECURITY;
+ALTER TABLE blog_affiliate_clicks ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "anon_insert_clicks" ON affiliate_clicks
+CREATE POLICY "anon_insert_clicks" ON blog_affiliate_clicks
   FOR INSERT TO anon
   WITH CHECK (true);
 

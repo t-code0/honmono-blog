@@ -79,7 +79,7 @@ export async function trackClick(
   const supabase = getSupabase();
   if (!supabase) return;
 
-  await supabase.from("affiliate_clicks").insert({
+  await supabase.from("blog_affiliate_clicks").insert({
     article_id: articleId,
     program_id: programId,
   });
