@@ -1,6 +1,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { getServiceClient } from "./supabase";
 import { HONMONO_APPS, CATEGORIES, getCategoryBySlug } from "./constants";
+import { matchAffiliatePrograms } from "./affiliates";
 
 const HAIKU_MODEL = "claude-haiku-4-5-20251001";
 const MAX_TOKENS = 6000;
@@ -215,7 +216,14 @@ export async function generateArticle(): Promise<GenerationResult> {
     const toc = extractToc(contentMd);
     const slug = generateSlug(kw.category, kw.keyword);
 
-    // 4. Save article
+    // 4. Match affiliate programs
+    const affiliateBlocks = await matchAffiliatePrograms(
+      kw.category,
+      kw.keyword,
+      contentMd
+    );
+
+    // 5. Save article
     const { error: articleError } = await supabase.from("blog_articles").insert({
       slug,
       keyword_id: kw.id,
@@ -224,7 +232,7 @@ export async function generateArticle(): Promise<GenerationResult> {
       description,
       content_md: contentMd,
       toc,
-      affiliate_blocks: kw.affiliate_links,
+      affiliate_blocks: affiliateBlocks.length > 0 ? affiliateBlocks : null,
       status: "published",
       published_at: new Date().toISOString(),
     });

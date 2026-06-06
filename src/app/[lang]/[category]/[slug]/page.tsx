@@ -171,7 +171,7 @@ export default async function ArticlePage({
         />
 
         {/* Affiliate block */}
-        <AffiliateBlock blocks={article.affiliate_blocks} />
+        <AffiliateBlock blocks={article.affiliate_blocks} articleId={article.id} />
 
         {/* Related articles */}
         <RelatedArticles articles={relatedArticles} lang={validLang} />

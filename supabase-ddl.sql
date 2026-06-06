@@ -69,6 +69,42 @@ CREATE POLICY "anon_read_published_articles" ON blog_articles
 
 -- service_role は RLS をバイパスするのでポリシー不要
 
+-- 7. affiliate_programs テーブル
+CREATE TABLE IF NOT EXISTS affiliate_programs (
+  id BIGSERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  url TEXT NOT NULL,
+  category TEXT NOT NULL,
+  keywords TEXT[] NOT NULL DEFAULT '{}',
+  description TEXT,
+  reward_type TEXT DEFAULT 'purchase',
+  active BOOLEAN NOT NULL DEFAULT true,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_affiliate_programs_category ON affiliate_programs(category);
+CREATE INDEX IF NOT EXISTS idx_affiliate_programs_active ON affiliate_programs(active);
+
+ALTER TABLE affiliate_programs ENABLE ROW LEVEL SECURITY;
+
+-- 8. affiliate_clicks トラッキングテーブル
+CREATE TABLE IF NOT EXISTS affiliate_clicks (
+  id BIGSERIAL PRIMARY KEY,
+  article_id BIGINT REFERENCES blog_articles(id),
+  program_id BIGINT REFERENCES affiliate_programs(id),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_affiliate_clicks_article ON affiliate_clicks(article_id);
+CREATE INDEX IF NOT EXISTS idx_affiliate_clicks_program ON affiliate_clicks(program_id);
+CREATE INDEX IF NOT EXISTS idx_affiliate_clicks_date ON affiliate_clicks(created_at DESC);
+
+ALTER TABLE affiliate_clicks ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "anon_insert_clicks" ON affiliate_clicks
+  FOR INSERT TO anon
+  WITH CHECK (true);
+
 -- ============================================================
 -- 🔴 手動② 初期キーワード35件投入
 -- ============================================================
