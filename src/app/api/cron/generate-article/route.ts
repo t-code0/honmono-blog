@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { generateArticle } from "@/lib/claude";
+import { generateArticle, replenishKeywordsIfNeeded } from "@/lib/claude";
 import { revalidatePath } from "next/cache";
 
-export const maxDuration = 60; // Vercel Hobby: max 60s
+const ARTICLES_PER_RUN = 3;
+
+export const maxDuration = 300; // Vercel Hobby: max 300s for cron
 
 export async function GET(request: NextRequest) {
-  // CRON_SECRET guard
   const authHeader = request.headers.get("authorization");
   const cronSecret = process.env.CRON_SECRET;
 
@@ -13,40 +14,76 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  try {
-    const result = await generateArticle();
+  const results: {
+    index: number;
+    success: boolean;
+    slug?: string;
+    title?: string;
+    category?: string;
+    costJpy?: number;
+    durationMs?: number;
+    error?: string;
+  }[] = [];
 
-    // Revalidate affected pages
-    revalidatePath(`/ja`);
-    revalidatePath(`/en`);
-    revalidatePath(`/ja/${result.category}`);
-    revalidatePath(`/en/${result.category}`);
-    revalidatePath(`/ja/${result.category}/${result.slug}`);
-    revalidatePath(`/en/${result.category}/${result.slug}`);
+  // Generate articles sequentially
+  for (let i = 0; i < ARTICLES_PER_RUN; i++) {
+    try {
+      const result = await generateArticle();
 
-    return NextResponse.json({
-      success: true,
-      article: {
+      revalidatePath(`/ja`);
+      revalidatePath(`/ja/${result.category}`);
+      revalidatePath(`/ja/${result.category}/${result.slug}`);
+
+      results.push({
+        index: i + 1,
+        success: true,
         slug: result.slug,
         title: result.title,
         category: result.category,
-        url: `/ja/${result.category}/${result.slug}`,
-      },
-      cost: {
-        inputTokens: result.inputTokens,
-        outputTokens: result.outputTokens,
         costJpy: result.costJpy,
         durationMs: result.durationMs,
-      },
-    });
-  } catch (error) {
-    console.error("Article generation failed:", error);
-    return NextResponse.json(
-      {
-        error: "Generation failed",
-        message: error instanceof Error ? error.message : String(error),
-      },
-      { status: 500 }
-    );
+      });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      console.error(`Article ${i + 1}/${ARTICLES_PER_RUN} failed:`, message);
+      results.push({
+        index: i + 1,
+        success: false,
+        error: message,
+      });
+      // No pending keywords left → stop loop
+      if (message.includes("No pending keywords")) break;
+    }
   }
+
+  // Replenish keywords if running low
+  let replenished = 0;
+  try {
+    replenished = await replenishKeywordsIfNeeded();
+  } catch (error) {
+    console.error("Keyword replenishment failed:", error);
+  }
+
+  const succeeded = results.filter((r) => r.success);
+  const failed = results.filter((r) => !r.success);
+  const totalCost = succeeded.reduce((sum, r) => sum + (r.costJpy || 0), 0);
+  const totalDuration = succeeded.reduce((sum, r) => sum + (r.durationMs || 0), 0);
+
+  console.log(
+    `[CRON] Generated ${succeeded.length}/${ARTICLES_PER_RUN} articles. ` +
+    `Cost: ${totalCost.toFixed(2)}円, Duration: ${(totalDuration / 1000).toFixed(1)}s. ` +
+    `Replenished: ${replenished} keywords.`
+  );
+
+  return NextResponse.json({
+    summary: {
+      total: ARTICLES_PER_RUN,
+      succeeded: succeeded.length,
+      failed: failed.length,
+      totalCostJpy: Math.round(totalCost * 10000) / 10000,
+      totalDurationMs: totalDuration,
+      keywordsReplenished: replenished,
+    },
+    results,
+  });
 }

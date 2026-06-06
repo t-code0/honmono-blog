@@ -1,6 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { getServiceClient } from "./supabase";
-import { HONMONO_APPS, CATEGORIES, getCategoryBySlug } from "./constants";
+import { HONMONO_APPS, CATEGORIES, CATEGORY_SLUGS, getCategoryBySlug } from "./constants";
 import { matchAffiliatePrograms } from "./affiliates";
 
 const HAIKU_MODEL = "claude-haiku-4-5-20251001";
@@ -289,4 +289,131 @@ export async function generateArticle(): Promise<GenerationResult> {
 
     throw error;
   }
+}
+
+const REPLENISH_THRESHOLD = 10;
+const KEYWORDS_PER_CATEGORY = 3; // 7 categories × 3 = 21 keywords
+
+/**
+ * pending キーワードが閾値未満なら自動補充。補充した件数を返す。
+ */
+export async function replenishKeywordsIfNeeded(): Promise<number> {
+  const supabase = getServiceClient();
+  if (!supabase) return 0;
+
+  // Count pending keywords
+  const { count, error: countError } = await supabase
+    .from("blog_keywords")
+    .select("*", { count: "exact", head: true })
+    .eq("status", "pending");
+
+  if (countError || count === null || count >= REPLENISH_THRESHOLD) return 0;
+
+  // Get existing keywords to avoid duplicates and for context
+  const { data: existing } = await supabase
+    .from("blog_keywords")
+    .select("keyword, category")
+    .order("id", { ascending: false })
+    .limit(50);
+
+  const existingList = (existing || [])
+    .map((k: { keyword: string; category: string }) => `[${k.category}] ${k.keyword}`)
+    .join("\n");
+
+  const categoryList = CATEGORY_SLUGS.join(", ");
+
+  const prompt = `あなたはSEOキーワードリサーチの専門家です。
+以下の7カテゴリに対して、各${KEYWORDS_PER_CATEGORY}件ずつ、合計${CATEGORY_SLUGS.length * KEYWORDS_PER_CATEGORY}件の新しいブログ記事キーワードを生成してください。
+
+## カテゴリ
+${categoryList}
+
+## 既存キーワード（重複禁止）
+${existingList}
+
+## 要件
+- ニッチで深掘り型のキーワード（一般的すぎるものは不可）
+- ロングテールSEOを狙える具体的なテーマ
+- 検索意図(search_intent)を付与: review, comparison, howto, list, explainer のいずれか
+- 既存キーワードと被らない新規テーマ
+- 「最新の〜」「今年の〜」等の時間陳腐化表現は禁止
+
+## 出力形式
+JSON配列のみを出力してください。他のテキストは不要です。
+[
+  {"keyword": "キーワード文", "category": "カテゴリslug", "search_intent": "intent種別"},
+  ...
+]`;
+
+  const client = new Anthropic();
+  const response = await client.messages.create({
+    model: HAIKU_MODEL,
+    max_tokens: 3000,
+    messages: [{ role: "user", content: prompt }],
+  });
+
+  const text = response.content[0].type === "text" ? response.content[0].text : "";
+
+  // Extract JSON from response
+  const jsonMatch = text.match(/\[[\s\S]*\]/);
+  if (!jsonMatch) return 0;
+
+  let keywords: { keyword: string; category: string; search_intent: string }[];
+  try {
+    keywords = JSON.parse(jsonMatch[0]);
+  } catch {
+    return 0;
+  }
+
+  // Validate and filter
+  const validIntents = ["review", "comparison", "howto", "list", "explainer"];
+  const validKeywords = keywords.filter(
+    (k) =>
+      k.keyword &&
+      CATEGORY_SLUGS.includes(k.category) &&
+      validIntents.includes(k.search_intent)
+  );
+
+  if (validKeywords.length === 0) return 0;
+
+  // Insert with ON CONFLICT DO NOTHING
+  const rows = validKeywords.map((k, i) => ({
+    keyword: k.keyword,
+    category: k.category,
+    search_intent: k.search_intent,
+    priority: 5 + i,
+    status: "pending" as const,
+  }));
+
+  const { data: inserted, error: insertError } = await supabase
+    .from("blog_keywords")
+    .upsert(rows, { onConflict: "keyword", ignoreDuplicates: true })
+    .select("id");
+
+  if (insertError) {
+    console.error("Keyword replenishment insert failed:", insertError.message);
+    return 0;
+  }
+
+  const count2 = inserted?.length || 0;
+
+  // Log the replenishment cost
+  await supabase.from("blog_generation_logs").insert({
+    keyword_id: null,
+    model: HAIKU_MODEL,
+    input_tokens: response.usage.input_tokens,
+    output_tokens: response.usage.output_tokens,
+    cost_jpy:
+      Math.round(
+        (response.usage.input_tokens * INPUT_COST_PER_TOKEN +
+          response.usage.output_tokens * OUTPUT_COST_PER_TOKEN) *
+          USD_TO_JPY *
+          10000
+      ) / 10000,
+    duration_ms: 0,
+    error: null,
+  });
+
+  console.log(`[REPLENISH] Added ${count2} new keywords`);
+  return count2;
 }
