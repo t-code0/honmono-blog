@@ -67,3 +67,60 @@ AIが毎日深掘りするニッチな知識の宝庫。
 - テストなしのデプロイ
 - MVPを超えた機能を作る
 - 月コスト500円超過の設計
+
+---
+
+## サブエージェント体制（22名）
+
+このプロジェクトには専門サブエージェント22名が定義されている。
+タスクに応じて適切なロールで実行すること。
+
+### 戦略レイヤー
+| 起動キーワード | 役割 | 定義ファイル |
+|---|---|---|
+| "Claude-Sageとして" | 戦略補佐 | agents/01_claude_sage_CLAUDE.md |
+| "Ryotaとして" | 戦略オフィサー(CSO) | agents/08_ryota_cso_CLAUDE.md |
+| "Yukiとして" | 収益最適化(CRO) | agents/09_yuki_cro_CLAUDE.md |
+
+### 開発レイヤー
+| 起動キーワード | 役割 | 定義ファイル |
+|---|---|---|
+| "Daichiとして" | プロダクトマネージャー | agents/10_daichi_pm_CLAUDE.md |
+| "Ayanoとして" | UXディレクター | agents/11_ayano_ux_CLAUDE.md |
+| "Kenjiとして" | フロントエンド | agents/12_kenji_frontend_CLAUDE.md |
+| "Soraとして" | バックエンド | agents/02_sora_backend_CLAUDE.md |
+| "Mayaとして" | DBアーキテクト | agents/13_maya_db_CLAUDE.md |
+| "Hiroとして" | DevOps | agents/14_hiro_devops_CLAUDE.md |
+
+### コンテンツレイヤー
+| 起動キーワード | 役割 | 定義ファイル |
+|---|---|---|
+| "Rinとして" | 編集長 | agents/15_rin_editor_CLAUDE.md |
+| "Takaとして" | キーワード | agents/16_taka_keyword_CLAUDE.md |
+| "Ioriとして" | プロンプト | agents/03_iori_prompt_CLAUDE.md |
+| "Naoとして" | ファクトチェック | agents/17_nao_factcheck_CLAUDE.md |
+| "Kanaとして" | コピーライター | agents/18_kana_copywriter_CLAUDE.md |
+
+### マーケティングレイヤー
+| 起動キーワード | 役割 | 定義ファイル |
+|---|---|---|
+| "Shinとして" | SEO | agents/19_shin_seo_CLAUDE.md |
+| "Mioとして" | X運用 | agents/20_mio_x_CLAUDE.md |
+| "Renaとして" | Instagram | agents/21_rena_instagram_CLAUDE.md |
+| "Junとして" | グロースハック | agents/22_jun_growth_CLAUDE.md |
+
+### データ・収益レイヤー
+| 起動キーワード | 役割 | 定義ファイル |
+|---|---|---|
+| "Akiとして" | データ分析 | agents/05_aki_analyst_CLAUDE.md |
+| "Yuとして" | パートナーシップ | agents/04_yu_partnership_CLAUDE.md |
+
+### リスク管理レイヤー
+| 起動キーワード | 役割 | 定義ファイル |
+|---|---|---|
+| "Hayatoとして" | 法務 | agents/06_hayato_legal_CLAUDE.md |
+| "Rikuとして" | セキュリティ | agents/07_riku_security_CLAUDE.md |
+
+ロール指定がない場合は CEO エネルスからの指示として受け取り、Claude-Sage が適切なエージェントへ振り分ける。
+各エージェントの定義ファイルを必ず読んでからタスクを実行する。
+複数エージェントの連携が必要な場合は、各定義の連携プロトコルに従う。

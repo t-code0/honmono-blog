@@ -54,8 +54,36 @@ export function Footer({ lang }: { lang: Lang }) {
             </ul>
           </div>
         </div>
-        <div className="mt-8 pt-6 border-t border-border text-center text-xs text-muted">
-          &copy; {new Date().getFullYear()} HONMONO. All rights reserved.
+        <div className="mt-8 pt-6 border-t border-border">
+          <div className="flex flex-wrap justify-center gap-4 mb-4 text-xs text-muted">
+            <Link
+              href={`/${lang}/about`}
+              className="hover:text-foreground transition-colors"
+            >
+              運営者情報
+            </Link>
+            <Link
+              href={`/${lang}/privacy`}
+              className="hover:text-foreground transition-colors"
+            >
+              プライバシーポリシー
+            </Link>
+            <Link
+              href={`/${lang}/disclaimer`}
+              className="hover:text-foreground transition-colors"
+            >
+              免責事項
+            </Link>
+            <Link
+              href={`/${lang}/affiliate-disclosure`}
+              className="hover:text-foreground transition-colors"
+            >
+              広告について
+            </Link>
+          </div>
+          <div className="text-center text-xs text-muted">
+            &copy; {new Date().getFullYear()} HONMONO. All rights reserved.
+          </div>
         </div>
       </div>
     </footer>
