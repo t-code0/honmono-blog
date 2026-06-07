@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>HONMONO ロゴ案 30種</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic Medium", "Meiryo", sans-serif;
+    background: #f5f3ee;
+    padding: 40px 20px;
+    color: #1a1a1a;
+    min-height: 100vh;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  h1 { font-size: 26px; margin-bottom: 12px; font-weight: 500; letter-spacing: 0.5px; }
+  .desc { color: #555; font-size: 14px; line-height: 1.8; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .card svg { width: 100%; height: auto; display: block; border-radius: 8px; }
+  .label {
+    font-size: 13px;
+    font-weight: 500;
+    margin: 14px 0 10px;
+    text-align: center;
+    color: #1a1a1a;
+  }
+  .buttons { display: flex; gap: 6px; }
+  button {
+    flex: 1;
+    padding: 8px 6px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 6px;
+    font-size: 11px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+    transition: all 0.15s;
+  }
+  button:hover { background: #f0f0f0; }
+  button.primary { background: #1f3a2f; color: white; border-color: #1f3a2f; }
+  button.primary:hover { background: #2d5544; }
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1a1a1a;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+    z-index: 1000;
+  }
+  .toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>HONMONO ロゴ案 30種</h1>
+  <p class="desc">気に入ったデザインの「PNG」または「SVG」ボタンをクリックしてダウンロード。<br>SNS用に1024×1024pxで出力されます。</p>
+</div>
+
+<div class="grid">
+
+<div class="card">
+<svg id="logo-A" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="8" fill="#c9302c"/>
+<text x="100" y="148" text-anchor="middle" font-size="130" font-weight="400" fill="#fafaf7" font-family="serif">本</text>
+</svg>
+<div class="label">A. 朱印 × 本</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-A','A-shuin-hon')">PNG</button>
+<button onclick="downloadSVG('logo-A','A-shuin-hon')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-B" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="8" fill="#1a1a1a"/>
+<text x="100" y="148" text-anchor="middle" font-size="130" font-weight="400" fill="#d4a017" font-family="serif">本</text>
+</svg>
+<div class="label">B. 墨 × 金本</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-B','B-sumi-kinhon')">PNG</button>
+<button onclick="downloadSVG('logo-B','B-sumi-kinhon')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-C" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="8" fill="#fafaf7" stroke="#1f3a2f" stroke-width="2"/>
+<text x="100" y="148" text-anchor="middle" font-size="140" font-weight="500" fill="#1f3a2f" font-family="serif">H</text>
+</svg>
+<div class="label">C. クリーム × 緑H</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-C','C-cream-greenH')">PNG</button>
+<button onclick="downloadSVG('logo-C','C-cream-greenH')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-D" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="8" fill="#1f3a2f"/>
+<text x="100" y="142" text-anchor="middle" font-size="130" font-weight="400" fill="#fafaf7" font-family="sans-serif">H</text>
+<line x1="50" y1="175" x2="150" y2="175" stroke="#d4a017" stroke-width="3"/>
+</svg>
+<div class="label">D. 深緑 × 白H × 金線</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-D','D-deepgreen-H')">PNG</button>
+<button onclick="downloadSVG('logo-D','D-deepgreen-H')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-E" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="0" fill="#c9302c"/>
+<rect x="20" y="20" width="160" height="160" rx="0" fill="none" stroke="#fafaf7" stroke-width="2"/>
+<text x="100" y="90" text-anchor="middle" font-size="60" font-weight="500" fill="#fafaf7" font-family="serif">本</text>
+<text x="100" y="155" text-anchor="middle" font-size="60" font-weight="500" fill="#fafaf7" font-family="serif">物</text>
+</svg>
+<div class="label">E. 朱印 × 本物縦</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-E','E-shuin-honmono')">PNG</button>
+<button onclick="downloadSVG('logo-E','E-shuin-honmono')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-F" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="8" fill="#fafaf7"/>
+<circle cx="100" cy="100" r="80" fill="#1f3a2f"/>
+<text x="100" y="132" text-anchor="middle" font-size="100" font-weight="400" fill="#fafaf7" font-family="serif">本</text>
+</svg>
+<div class="label">F. 円 × 本</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-F','F-circle-hon')">PNG</button>
+<button onclick="downloadSVG('logo-F','F-circle-hon')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-G" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="8" fill="#fafaf7" stroke="#1a365d" stroke-width="2"/>
+<circle cx="100" cy="80" r="32" fill="#c9302c"/>
+<polygon points="20,165 100,85 180,165" fill="#1a365d"/>
+<polygon points="50,165 100,115 150,165" fill="#fafaf7"/>
+<text x="100" y="190" text-anchor="middle" font-size="14" font-weight="500" fill="#1a1a1a" letter-spacing="2">HONMONO</text>
+</svg>
+<div class="label">G. 山と日の出</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-G','G-mountain-sun')">PNG</button>
+<button onclick="downloadSVG('logo-G','G-mountain-sun')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-H" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="8" fill="#fafaf7"/>
+<rect x="35" y="50" width="130" height="12" fill="#c9302c"/>
+<rect x="40" y="40" width="120" height="8" fill="#c9302c"/>
+<rect x="55" y="62" width="10" height="100" fill="#c9302c"/>
+<rect x="135" y="62" width="10" height="100" fill="#c9302c"/>
+<text x="100" y="195" text-anchor="middle" font-size="13" font-weight="500" fill="#1a1a1a" letter-spacing="2">HONMONO</text>
+</svg>
+<div class="label">H. 鳥居</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-H','H-torii')">PNG</button>
+<button onclick="downloadSVG('logo-H','H-torii')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-I" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="8" fill="#1a365d"/>
+<line x1="0" y1="50" x2="200" y2="50" stroke="#fafaf7" stroke-width="0.5" opacity="0.25"/>
+<line x1="0" y1="100" x2="200" y2="100" stroke="#fafaf7" stroke-width="0.5" opacity="0.25"/>
+<line x1="0" y1="150" x2="200" y2="150" stroke="#fafaf7" stroke-width="0.5" opacity="0.25"/>
+<line x1="50" y1="0" x2="50" y2="200" stroke="#fafaf7" stroke-width="0.5" opacity="0.25"/>
+<line x1="100" y1="0" x2="100" y2="200" stroke="#fafaf7" stroke-width="0.5" opacity="0.25"/>
+<line x1="150" y1="0" x2="150" y2="200" stroke="#fafaf7" stroke-width="0.5" opacity="0.25"/>
+<text x="100" y="148" text-anchor="middle" font-size="130" font-weight="400" fill="#fafaf7" font-family="serif">本</text>
+</svg>
+<div class="label">I. 藍 × 格子 × 本</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-I','I-ai-grid-hon')">PNG</button>
+<button onclick="downloadSVG('logo-I','I-ai-grid-hon')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-J" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="8" fill="#fafaf7"/>
+<text x="100" y="148" text-anchor="middle" font-size="140" font-weight="400" fill="#1a1a1a" font-family="serif" font-style="italic">本</text>
+</svg>
+<div class="label">J. 筆字 × 本</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-J','J-fude-hon')">PNG</button>
+<button onclick="downloadSVG('logo-J','J-fude-hon')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-K" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="0" fill="#c9302c" stroke="#1a1a1a" stroke-width="6"/>
+<text x="100" y="85" text-anchor="middle" font-size="24" font-weight="500" fill="#fafaf7" letter-spacing="2">HON</text>
+<text x="100" y="140" text-anchor="middle" font-size="24" font-weight="500" fill="#fafaf7" letter-spacing="2">MONO</text>
+</svg>
+<div class="label">K. 角印 HONMONO</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-K','K-kakuin')">PNG</button>
+<button onclick="downloadSVG('logo-K','K-kakuin')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-L" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="20" fill="#1f3a2f"/>
+<circle cx="155" cy="50" r="22" fill="#d4a017"/>
+<text x="100" y="150" text-anchor="middle" font-size="120" font-weight="400" fill="#fafaf7" font-family="sans-serif">H</text>
+</svg>
+<div class="label">L. モダン × H × 太陽</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-L','L-modern-H-sun')">PNG</button>
+<button onclick="downloadSVG('logo-L','L-modern-H-sun')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-M" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="8" fill="#c9302c"/>
+<text x="100" y="148" text-anchor="middle" font-size="130" font-weight="400" fill="#fafaf7" font-family="serif">真</text>
+</svg>
+<div class="label">M. 朱印 × 真</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-M','M-shuin-shin')">PNG</button>
+<button onclick="downloadSVG('logo-M','M-shuin-shin')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-N" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="8" fill="#1f3a2f"/>
+<text x="100" y="148" text-anchor="middle" font-size="130" font-weight="400" fill="#fafaf7" font-family="serif">誠</text>
+</svg>
+<div class="label">N. 深緑 × 誠</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-N','N-deepgreen-makoto')">PNG</button>
+<button onclick="downloadSVG('logo-N','N-deepgreen-makoto')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-O" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="8" fill="#1a1a1a"/>
+<text x="100" y="148" text-anchor="middle" font-size="130" font-weight="400" fill="#d4a017" font-family="serif">匠</text>
+</svg>
+<div class="label">O. 墨 × 金匠</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-O','O-sumi-takumi')">PNG</button>
+<button onclick="downloadSVG('logo-O','O-sumi-takumi')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-P" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="100" fill="#c9302c"/>
+<text x="100" y="148" text-anchor="middle" font-size="130" font-weight="400" fill="#fafaf7" font-family="serif">和</text>
+</svg>
+<div class="label">P. 朱円 × 和</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-P','P-shuen-wa')">PNG</button>
+<button onclick="downloadSVG('logo-P','P-shuen-wa')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-Q" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="100" fill="#1f3a2f"/>
+<text x="100" y="92" text-anchor="middle" font-size="18" font-weight="500" fill="#fafaf7" letter-spacing="3">HON</text>
+<text x="100" y="125" text-anchor="middle" font-size="18" font-weight="500" fill="#fafaf7" letter-spacing="3">MONO</text>
+</svg>
+<div class="label">Q. 円 × HONMONO</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-Q','Q-circle-honmono')">PNG</button>
+<button onclick="downloadSVG('logo-Q','Q-circle-honmono')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-R" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="100" fill="#fafaf7" stroke="#1a1a1a" stroke-width="2"/>
+<text x="100" y="140" text-anchor="middle" font-size="110" font-weight="400" fill="#1a1a1a" font-family="serif">ほ</text>
+</svg>
+<div class="label">R. 円 × ひらがな「ほ」</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-R','R-circle-ho')">PNG</button>
+<button onclick="downloadSVG('logo-R','R-circle-ho')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-S" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="8" fill="#1a365d"/>
+<text x="100" y="45" text-anchor="middle" font-size="22" font-weight="500" fill="#fafaf7">H</text>
+<text x="100" y="73" text-anchor="middle" font-size="22" font-weight="500" fill="#fafaf7">O</text>
+<text x="100" y="101" text-anchor="middle" font-size="22" font-weight="500" fill="#fafaf7">N</text>
+<text x="100" y="129" text-anchor="middle" font-size="22" font-weight="500" fill="#fafaf7">M</text>
+<text x="100" y="157" text-anchor="middle" font-size="22" font-weight="500" fill="#fafaf7">O</text>
+<text x="100" y="185" text-anchor="middle" font-size="22" font-weight="500" fill="#fafaf7">NO</text>
+</svg>
+<div class="label">S. 縦書きHONMONO × 藍</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-S','S-vertical-honmono')">PNG</button>
+<button onclick="downloadSVG('logo-S','S-vertical-honmono')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-T" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="8" fill="#fafaf7"/>
+<text x="100" y="135" text-anchor="middle" font-size="110" font-weight="500" fill="#1a1a1a" font-family="serif">本</text>
+<circle cx="100" cy="160" r="4" fill="#c9302c"/>
+</svg>
+<div class="label">T. ミニマル × 本 × 朱点</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-T','T-minimal-hon-dot')">PNG</button>
+<button onclick="downloadSVG('logo-T','T-minimal-hon-dot')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-U" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="8" fill="#1a1a1a"/>
+<path d="M 145 50 A 35 35 0 1 0 145 120 A 25 25 0 1 1 145 50 Z" fill="#d4a017"/>
+<text x="80" y="158" text-anchor="middle" font-size="100" font-weight="400" fill="#fafaf7" font-family="serif">本</text>
+</svg>
+<div class="label">U. 三日月 × 本</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-U','U-moon-hon')">PNG</button>
+<button onclick="downloadSVG('logo-U','U-moon-hon')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-V" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="8" fill="#1a365d"/>
+<path d="M 0 40 Q 25 30 50 40 T 100 40 T 150 40 T 200 40" fill="none" stroke="#fafaf7" stroke-width="1.5" opacity="0.4"/>
+<path d="M 0 55 Q 25 45 50 55 T 100 55 T 150 55 T 200 55" fill="none" stroke="#fafaf7" stroke-width="1.5" opacity="0.4"/>
+<path d="M 0 70 Q 25 60 50 70 T 100 70 T 150 70 T 200 70" fill="none" stroke="#fafaf7" stroke-width="1.5" opacity="0.4"/>
+<text x="100" y="155" text-anchor="middle" font-size="120" font-weight="400" fill="#fafaf7" font-family="serif">本</text>
+</svg>
+<div class="label">V. 青海波 × 本</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-V','V-seigaiha-hon')">PNG</button>
+<button onclick="downloadSVG('logo-V','V-seigaiha-hon')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-W" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="8" fill="#fafaf7"/>
+<g stroke="#c9302c" stroke-width="1" fill="none" opacity="0.35">
+<line x1="0" y1="50" x2="200" y2="50"/>
+<line x1="0" y1="100" x2="200" y2="100"/>
+<line x1="0" y1="150" x2="200" y2="150"/>
+<line x1="25" y1="25" x2="175" y2="175"/>
+<line x1="25" y1="175" x2="175" y2="25"/>
+<line x1="100" y1="0" x2="100" y2="200"/>
+</g>
+<circle cx="100" cy="100" r="62" fill="#fafaf7"/>
+<text x="100" y="138" text-anchor="middle" font-size="90" font-weight="400" fill="#c9302c" font-family="serif">本</text>
+</svg>
+<div class="label">W. 麻の葉風 × 本</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-W','W-asanoha-hon')">PNG</button>
+<button onclick="downloadSVG('logo-W','W-asanoha-hon')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-X" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="8" fill="#fafaf7"/>
+<rect x="0" y="0" width="50" height="50" fill="#1f3a2f"/>
+<rect x="100" y="0" width="50" height="50" fill="#1f3a2f"/>
+<rect x="50" y="50" width="50" height="50" fill="#1f3a2f"/>
+<rect x="150" y="50" width="50" height="50" fill="#1f3a2f"/>
+<rect x="0" y="100" width="50" height="50" fill="#1f3a2f"/>
+<rect x="100" y="100" width="50" height="50" fill="#1f3a2f"/>
+<rect x="50" y="150" width="50" height="50" fill="#1f3a2f"/>
+<rect x="150" y="150" width="50" height="50" fill="#1f3a2f"/>
+<circle cx="100" cy="100" r="60" fill="#fafaf7"/>
+<text x="100" y="135" text-anchor="middle" font-size="85" font-weight="400" fill="#1f3a2f" font-family="serif">本</text>
+</svg>
+<div class="label">X. 市松 × 本</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-X','X-ichimatsu-hon')">PNG</button>
+<button onclick="downloadSVG('logo-X','X-ichimatsu-hon')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-Y" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="8" fill="#fafaf7"/>
+<circle cx="100" cy="85" r="40" fill="#c9302c"/>
+<text x="100" y="160" text-anchor="middle" font-size="18" font-weight="500" fill="#1a1a1a" letter-spacing="3">HONMONO</text>
+<line x1="40" y1="175" x2="160" y2="175" stroke="#c9302c" stroke-width="1.5"/>
+</svg>
+<div class="label">Y. 太陽 × HONMONO</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-Y','Y-sun-honmono')">PNG</button>
+<button onclick="downloadSVG('logo-Y','Y-sun-honmono')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-Z" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="8" fill="#fafaf7"/>
+<text x="100" y="148" text-anchor="middle" font-size="140" font-weight="400" fill="#1a1a1a" font-family="serif">ホ</text>
+</svg>
+<div class="label">Z. ミニマル × カタカナ「ホ」</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-Z','Z-minimal-katakana')">PNG</button>
+<button onclick="downloadSVG('logo-Z','Z-minimal-katakana')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-AA" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="0" fill="#c9302c" stroke="#1a1a1a" stroke-width="8"/>
+<text x="100" y="148" text-anchor="middle" font-size="120" font-weight="500" fill="#fafaf7" font-family="serif">実</text>
+</svg>
+<div class="label">AA. 印章 × 実</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-AA','AA-inshou-jitsu')">PNG</button>
+<button onclick="downloadSVG('logo-AA','AA-inshou-jitsu')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-BB" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="0" fill="#c9302c" stroke="#1a1a1a" stroke-width="8"/>
+<text x="100" y="148" text-anchor="middle" font-size="120" font-weight="500" fill="#fafaf7" font-family="serif">真</text>
+</svg>
+<div class="label">BB. 印章 × 真</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-BB','BB-inshou-shin')">PNG</button>
+<button onclick="downloadSVG('logo-BB','BB-inshou-shin')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-CC" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="8" fill="#fafaf7" stroke="#1a1a1a" stroke-width="6"/>
+<rect x="15" y="15" width="170" height="170" rx="4" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+<text x="100" y="148" text-anchor="middle" font-size="115" font-weight="500" fill="#1a1a1a" font-family="serif">本物</text>
+</svg>
+<div class="label">CC. 額縁 × 本物</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-CC','CC-frame-honmono')">PNG</button>
+<button onclick="downloadSVG('logo-CC','CC-frame-honmono')">SVG</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="logo-DD" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="8" fill="#1f3a2f"/>
+<text x="100" y="100" text-anchor="middle" font-size="55" font-weight="500" fill="#fafaf7" font-family="serif">本</text>
+<line x1="55" y1="115" x2="145" y2="115" stroke="#d4a017" stroke-width="1.5"/>
+<text x="100" y="150" text-anchor="middle" font-size="14" font-weight="500" fill="#fafaf7" letter-spacing="3">HONMONO</text>
+</svg>
+<div class="label">DD. 本×HONMONO組合せ</div>
+<div class="buttons">
+<button class="primary" onclick="downloadPNG('logo-DD','DD-combo')">PNG</button>
+<button onclick="downloadSVG('logo-DD','DD-combo')">SVG</button>
+</div>
+</div>
+
+</div>
+
+<div class="toast" id="toast">ダウンロードしました</div>
+
+<script>
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 1500);
+}
+
+function downloadSVG(id, name) {
+  const svg = document.getElementById(id);
+  const clone = svg.cloneNode(true);
+  if (!clone.getAttribute('xmlns')) {
+    clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+  }
+  const serializer = new XMLSerializer();
+  const svgStr = '<?xml version="1.0" encoding="UTF-8"?>\n' + serializer.serializeToString(clone);
+  const blob = new Blob([svgStr], {type: 'image/svg+xml;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'honmono-' + name + '.svg';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  showToast('SVG をダウンロードしました');
+}
+
+function downloadPNG(id, name) {
+  const svg = document.getElementById(id);
+  const clone = svg.cloneNode(true);
+  if (!clone.getAttribute('xmlns')) {
+    clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+  }
+  const serializer = new XMLSerializer();
+  const svgStr = serializer.serializeToString(clone);
+  const svgBlob = new Blob([svgStr], {type: 'image/svg+xml;charset=utf-8'});
+  const svgUrl = URL.createObjectURL(svgBlob);
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.onload = function() {
+    const canvas = document.createElement('canvas');
+    canvas.width = 1024;
+    canvas.height = 1024;
+    const ctx = canvas.getContext('2d');
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(img, 0, 0, 1024, 1024);
+    URL.revokeObjectURL(svgUrl);
+    canvas.toBlob(function(blob) {
+      const pngUrl = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = pngUrl;
+      a.download = 'honmono-' + name + '.png';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(pngUrl); }, 1000);
+      showToast('PNG (1024×1024) をダウンロードしました');
+    }, 'image/png');
+  };
+  img.onerror = function() {
+    showToast('エラー：再度お試しください');
+    URL.revokeObjectURL(svgUrl);
+  };
+  img.src = svgUrl;
+}
+</script>
+
+</body>
+</html>
