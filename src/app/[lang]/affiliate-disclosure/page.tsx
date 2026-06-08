@@ -117,7 +117,15 @@ export default async function AffiliateDisclosurePage({ params }: Props) {
           コンテンツ品質の向上等）に充てさせていただいています。
         </p>
 
-        <h2 className="text-xl font-bold mt-8 mb-3">7. お問い合わせ</h2>
+        <h2 className="text-xl font-bold mt-8 mb-3">
+          7. Amazonアソシエイトについて
+        </h2>
+        <p>
+          Amazonのアソシエイトとして、当メディアは適格販売により収入を得ています。
+          当サイトでは、Amazon.co.jpの商品リンクをアフィリエイトリンクとして掲載しています。
+        </p>
+
+        <h2 className="text-xl font-bold mt-8 mb-3">8. お問い合わせ</h2>
         <p>
           アフィリエイト表示に関するご質問は、下記までご連絡ください。
         </p>

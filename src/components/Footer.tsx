@@ -81,6 +81,9 @@ export function Footer({ lang }: { lang: Lang }) {
               広告について
             </Link>
           </div>
+          <p className="text-center text-[11px] text-muted mb-2">
+            当サイトはアフィリエイト広告（Amazonアソシエイト含む）を掲載しています。
+          </p>
           <div className="text-center text-xs text-muted">
             &copy; {new Date().getFullYear()} HONMONO. All rights reserved.
           </div>

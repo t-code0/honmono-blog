@@ -101,6 +101,9 @@ export default async function PrivacyPage({ params }: Props) {
           AdSense等）を利用する場合があります。
           広告配信事業者は、ユーザーの興味に応じた広告を表示するためにCookieを使用することがあります。
         </p>
+        <p>
+          当サイトはAmazonアソシエイト・プログラムに参加しており、適格販売により紹介料を得ています。
+        </p>
 
         <h2 className="text-xl font-bold mt-8 mb-3">
           7. 個人情報の開示・訂正・削除
