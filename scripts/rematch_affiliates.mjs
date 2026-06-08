@@ -60,6 +60,10 @@ function matchPrograms(category, title, contentMd, maxCount) {
     if (program.category === category) {
       score += 0.5;
     }
+    // category='all' のジェネリックプログラムはスコアを0.7倍に抑制
+    if (program.category === "all") {
+      score *= 0.7;
+    }
     return { program, score };
   });
 

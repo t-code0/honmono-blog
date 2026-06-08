@@ -52,6 +52,11 @@ export async function matchAffiliatePrograms(
     if (program.category === category) {
       score += 0.5;
     }
+    // category='all' のジェネリックプログラムはスコアを0.7倍に抑制
+    // A8特化プログラムが十分マッチすれば優先される
+    if (program.category === "all") {
+      score *= 0.7;
+    }
     return { program, score };
   });
 
