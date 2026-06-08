@@ -49,7 +49,35 @@ export default async function TopPage({
     }
   }
 
+  // JSON-LD: WebSite + SearchAction
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "HONMONOブログ",
+    url: SITE_URL,
+    description:
+      "AIが毎日深掘りするニッチな知識の宝庫。世界の食・日本文化・AI・健康・サウナ・珈琲・キャンプ。",
+    publisher: {
+      "@type": "Organization",
+      name: "HONMONO",
+      url: SITE_URL,
+    },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${SITE_URL}/${validLang}?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
     <div className="max-w-5xl mx-auto px-4 py-8">
       {/* Hero */}
       <section className="text-center mb-12">
@@ -108,5 +136,6 @@ export default async function TopPage({
 
       <InternalLinks />
     </div>
+    </>
   );
 }

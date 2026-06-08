@@ -76,7 +76,32 @@ export default async function ArticlePage({
   const relatedArticles = await getRelatedArticles(category, slug, 3);
   const contentHtml = markdownToHtml(article.content_md);
 
-  // JSON-LD structured data
+  // JSON-LD: BreadcrumbList
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "トップ",
+        item: `${SITE_URL}/${lang}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: `${cat.emoji} ${cat.nameJa}`,
+        item: `${SITE_URL}/${lang}/${category}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: article.title,
+      },
+    ],
+  };
+
+  // JSON-LD: Article
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -103,6 +128,10 @@ export default async function ArticlePage({
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
