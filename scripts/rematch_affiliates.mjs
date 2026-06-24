@@ -82,6 +82,7 @@ function matchPrograms(category, title, contentMd, maxCount) {
 // 4. 各記事をリマッチ & UPDATE
 let updatedCount = 0;
 let rakutenInsertedCount = 0;
+let amazonInsertedCount = 0;
 const results = [];
 
 for (const article of articles) {
@@ -100,6 +101,7 @@ for (const article of articles) {
 
   const afterCount = newBlocks.length;
   const hasRakuten = newBlocks.some((b) => b.title.includes("楽天"));
+  const hasAmazon = newBlocks.some((b) => b.title.includes("Amazon"));
 
   // UPDATE
   const updateRes = await fetch(
@@ -120,6 +122,7 @@ for (const article of articles) {
 
   updatedCount++;
   if (hasRakuten) rakutenInsertedCount++;
+  if (hasAmazon) amazonInsertedCount++;
 
   results.push({
     id: article.id,
@@ -127,19 +130,21 @@ for (const article of articles) {
     before: beforeCount,
     after: afterCount,
     rakuten: hasRakuten ? "✅" : "-",
+    amazon: hasAmazon ? "✅" : "-",
     programs: newBlocks.map((b) => b.title).join(", "),
   });
 }
 
 // 5. レポート
 console.log("=== リマッチ結果 ===\n");
-console.log("id | category | Before | After | 楽天 | プログラム");
-console.log("---|----------|--------|-------|------|----------");
+console.log("id | category | Before | After | 楽天 | Amazon | プログラム");
+console.log("---|----------|--------|-------|------|--------|----------");
 for (const r of results) {
   console.log(
-    `${r.id} | ${r.category} | ${r.before} | ${r.after} | ${r.rakuten} | ${r.programs.substring(0, 50)}`
+    `${r.id} | ${r.category} | ${r.before} | ${r.after} | ${r.rakuten} | ${r.amazon} | ${r.programs.substring(0, 60)}`
   );
 }
 console.log("\n---");
 console.log(`✅ 更新件数: ${updatedCount} / ${articles.length}`);
 console.log(`🛒 楽天が挿入された記事数: ${rakutenInsertedCount}`);
+console.log(`📦 Amazonが挿入された記事数: ${amazonInsertedCount}`);
