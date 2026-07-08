@@ -145,17 +145,6 @@ export default async function AboutPage({ params }: Props) {
             </a>{" "}
             - 口コミAI分析で本物のお店を発見
           </li>
-          <li>
-            <a
-              href="https://arifu.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:text-blue-800"
-            >
-              アリフ
-            </a>{" "}
-            - Amazon商品の本物度をAIが分析
-          </li>
         </ul>
 
         <p className="text-sm text-muted mt-8">最終更新: 2026年6月7日</p>

@@ -106,12 +106,6 @@ export const HONMONO_APPS = [
     description: "口コミをAI分析して本物のお店を発見。本物スコアで信頼度が一目瞭然。",
     emoji: "📍",
   },
-  {
-    name: "アリフ",
-    url: "https://arifu.vercel.app",
-    description: "Amazon商品の本物度をAIが分析。失敗しない買い物を。",
-    emoji: "🛒",
-  },
 ];
 
 // 記事生成の search_intent タイプ
