@@ -46,6 +46,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     alternates: alternate("/honmono-goods/privacy"),
   }));
 
+  // HONMONO GOODS privacy (root, no lang prefix — for Pinterest)
+  const goodsPrivacyRoot: MetadataRoute.Sitemap = [{
+    url: `${baseUrl}/honmono-goods-privacy`,
+    lastModified: "2026-07-08",
+    changeFrequency: "yearly" as const,
+    priority: 0.5,
+  }];
+
   // Article pages with updated_at
   let articlePages: MetadataRoute.Sitemap = [];
   try {
@@ -71,5 +79,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   } catch {}
 
-  return [...staticPages, ...categoryPages, ...goodsPrivacyPages, ...articlePages];
+  return [...staticPages, ...categoryPages, ...goodsPrivacyPages, ...goodsPrivacyRoot, ...articlePages];
 }
