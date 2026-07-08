@@ -37,6 +37,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
+  // HONMONO GOODS privacy policy
+  const goodsPrivacyPages: MetadataRoute.Sitemap = ACTIVE_LANGS.map((lang) => ({
+    url: `${baseUrl}/${lang}/honmono-goods/privacy`,
+    lastModified: "2026-07-08",
+    changeFrequency: "yearly" as const,
+    priority: 0.5,
+    alternates: alternate("/honmono-goods/privacy"),
+  }));
+
   // Article pages with updated_at
   let articlePages: MetadataRoute.Sitemap = [];
   try {
@@ -62,5 +71,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   } catch {}
 
-  return [...staticPages, ...categoryPages, ...articlePages];
+  return [...staticPages, ...categoryPages, ...goodsPrivacyPages, ...articlePages];
 }
