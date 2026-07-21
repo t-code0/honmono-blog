@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# 記事生成パイプラインの生成物（正はSupabase側なのでコミットしない）
+scripts/logs/
+scripts/drafts/
